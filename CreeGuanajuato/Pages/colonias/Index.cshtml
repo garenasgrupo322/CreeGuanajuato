@@ -1,0 +1,49 @@
+﻿@page
+@model CreeGuanajuato.Pages.colonias.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Colonia[0].nombre_colonia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Colonia[0].codigo_postal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Colonia[0].Municipio)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Colonia) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre_colonia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.codigo_postal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Municipio.nombre_municipio)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.id_colonia">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.id_colonia">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.id_colonia">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - CreeGuanajuato</title>
+    <title>@ViewData["Title"] - Prueba</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -26,13 +26,27 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-page="/Index" class="navbar-brand">CreeGuanajuato</a>
+                <a asp-page="/Index" class="navbar-brand">Prueba</a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-page="/Index">Home</a></li>
-                    <li><a asp-page="/About">About</a></li>
-                    <li><a asp-page="/Contact">Contact</a></li>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Catálogos <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a asp-page="/estados/index">Estados</a></li>
+                            <li><a asp-page="/municipios/index">Municipios</a></li>
+                            <li><a asp-page="/colonias/index">Colonias</a></li>
+                            <li><a asp-page="/direcciones/index">Direcciones</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a asp-page="/escolaridad/index">Escolaridades</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a asp-page="/civil/index">Estados Civiles</a></li>
+                        </ul>
+                    </li>
+
+                    
+                    <li><a href="#" id="btnSincronizaInegi">Sincronizar INEGI</a></li>
+                    <li><a asp-page="/Contact">Salir</a></li>
                 </ul>
             </div>
         </div>
@@ -44,7 +58,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2019 - CreeGuanajuato</p>
+            <p>&copy; 2019 - Prueba</p>
         </footer>
     </div>
 

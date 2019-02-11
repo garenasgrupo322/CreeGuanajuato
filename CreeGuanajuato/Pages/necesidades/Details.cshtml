@@ -1,0 +1,26 @@
+﻿@page
+@model CreeGuanajuato.Pages.necesidades.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Necesidad</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Necesidad.descripcion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Necesidad.descripcion)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Necesidad.id_necesidad">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
