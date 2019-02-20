@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CreeGuanajuato.Models;
 
-namespace CreeGuanajuato.Pages.colonias
+namespace CreeGuanajuato.Pages.Colonias
 {
     public class DetailsModel : PageModel
     {

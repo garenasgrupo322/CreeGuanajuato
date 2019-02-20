@@ -1,0 +1,110 @@
+﻿@page
+@model CreeGuanajuato.Pages.Registros.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Detalle</h2>
+
+<div>
+    <h4>Registro</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Registro.nombre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Registro.nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Registro.apellido_paterno)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Registro.apellido_paterno)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Registro.apellido_materno)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Registro.apellido_materno)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Registro.INE)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Registro.INE)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Registro.email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Registro.email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Registro.fecha_nacimiento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Registro.fecha_nacimiento)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Registro.numero_hijos)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Registro.numero_hijos)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Registro.Estado)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Registro.Estado.nombre_estado)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Registro.Municipio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Registro.Municipio.nombre_municipio)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Registro.Colonia)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Registro.Colonia.nombre_colonia)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Registro.Direccion.calle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Registro.Direccion.calle)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Registro.Direccion.numero)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Registro.Direccion.numero)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Registro.Escolaridad)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Registro.Escolaridad.nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Registro.EstadoCivil)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Registro.EstadoCivil.nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Registro.Necesidad)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Registro.Necesidad.descripcion)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Registro.id_registro">Modificar</a> |
+    <a asp-page="./Index">Regresar</a>
+</div>

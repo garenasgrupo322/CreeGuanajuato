@@ -1,15 +1,16 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CreeGuanajuato.Areas.Identity.Data;
+using CreeGuanajuato.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using CreeGuanajuato.Models;
 
 namespace CreeGuanajuato
 {
@@ -33,10 +34,17 @@ namespace CreeGuanajuato
             });
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
             services.AddDbContext<CreeGuanajuatoContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("CreeGuanajuatoContext")));
+                    options.UseSqlServer(
+                        Configuration.GetConnectionString("CreeGuanajuatoContextConnection")));
+
+            services.AddDefaultIdentity<CreeGuanajuatoUser>(config =>
+            {
+                config.SignIn.RequireConfirmedEmail = true;
+            }).AddRoles<CreeGuanajuatoRole>()
+                .AddEntityFrameworkStores<CreeGuanajuatoContext>();
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,7 +61,7 @@ namespace CreeGuanajuato
 
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            app.UseAuthentication();
             app.UseMvc();
         }
     }

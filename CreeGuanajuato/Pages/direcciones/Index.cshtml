@@ -1,5 +1,5 @@
 ﻿@page
-@model CreeGuanajuato.Pages.direcciones.IndexModel
+@model CreeGuanajuato.Pages.Direcciones.IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -36,7 +36,7 @@
                 @Html.DisplayFor(modelItem => item.numero)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Colonia.codigo_postal)
+                @Html.DisplayFor(modelItem => item.Colonia.cve_loc)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.id_direccion">Edit</a> |

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CreeGuanajuato.Models;
 
-namespace CreeGuanajuato.Pages.necesidades
+namespace CreeGuanajuato.Pages.Necesidades
 {
     public class EditModel : PageModel
     {

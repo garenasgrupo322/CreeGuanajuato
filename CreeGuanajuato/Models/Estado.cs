@@ -16,7 +16,7 @@ namespace CreeGuanajuato.Models
         [DisplayName("Nombre")]
         public string nombre_estado { get; set; }
 
-        [Required]
+        
         [ScaffoldColumn(false)]
         public string cve_agee { get; set; }
     }

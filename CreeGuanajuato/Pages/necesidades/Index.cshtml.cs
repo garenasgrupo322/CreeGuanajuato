@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CreeGuanajuato.Models;
 
-namespace CreeGuanajuato.Pages.necesidades
+namespace CreeGuanajuato.Pages.Necesidades
 {
     public class IndexModel : PageModel
     {

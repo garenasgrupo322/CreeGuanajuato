@@ -25,7 +25,6 @@ namespace CreeGuanajuato.Models
 
         public virtual Municipio Municipio { get; set; }
 
-        [Required]
         [ScaffoldColumn(false)]
         public string cve_loc { get; set; }
     }

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CreeGuanajuato.Models;
 
-namespace CreeGuanajuato.Pages.estados
+namespace CreeGuanajuato.Pages.Estados
 {
     public class IndexModel : PageModel
     {

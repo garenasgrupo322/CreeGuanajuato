@@ -1,0 +1,104 @@
+﻿@page
+@model CreeGuanajuato.Pages.Registros.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Crear</h2>
+
+<h4>Nuevo registro</h4>
+<hr />
+<div class="row">
+    <form method="post">
+        <div class="col-lg-offset-1 col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Registro.nombre" class="control-label"></label>
+                <input asp-for="Registro.nombre" class="form-control" />
+                <span asp-validation-for="Registro.nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Registro.apellido_paterno" class="control-label"></label>
+                <input asp-for="Registro.apellido_paterno" class="form-control" />
+                <span asp-validation-for="Registro.apellido_paterno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Registro.apellido_materno" class="control-label"></label>
+                <input asp-for="Registro.apellido_materno" class="form-control" />
+                <span asp-validation-for="Registro.apellido_materno" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Registro.id_estado" class="control-label"></label>
+                <select asp-for="Registro.id_estado" class="form-control" asp-items="ViewBag.id_estado"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Registro.id_municipio" class="control-label"></label>
+                <select asp-for="Registro.id_municipio" class="form-control" asp-items="ViewBag.id_municipio"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Registro.id_colonia" class="control-label"></label>
+                <select asp-for="Registro.id_colonia" class="form-control" asp-items="ViewBag.id_colonia"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Registro.calle" class="control-label"></label>
+                <input asp-for="Registro.calle" class="form-control" />
+                <span asp-validation-for="Registro.calle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Registro.numero" class="control-label"></label>
+                <input asp-for="Registro.numero" class="form-control" />
+                <span asp-validation-for="Registro.numero" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-lg-offset-2 col-md-4">
+            <fieldset>
+                <div class="form-group">
+                    <label asp-for="Registro.INE" class="control-label"></label>
+                    <input asp-for="Registro.INE" class="form-control" />
+                    <span asp-validation-for="Registro.INE" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Registro.email" class="control-label"></label>
+                    <input asp-for="Registro.email" class="form-control" />
+                    <span asp-validation-for="Registro.email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Registro.fecha_nacimiento" class="control-label"></label>
+                    <input asp-for="Registro.fecha_nacimiento" class="form-control" />
+                    <span asp-validation-for="Registro.fecha_nacimiento" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Registro.numero_hijos" class="control-label"></label>
+                    <input asp-for="Registro.numero_hijos" class="form-control" />
+                    <span asp-validation-for="Registro.numero_hijos" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Registro.id_estado_civil" class="control-label"></label>
+                    <select asp-for="Registro.id_estado_civil" class="form-control" asp-items="ViewBag.id_estado_civil"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Registro.id_escolaridad" class="control-label"></label>
+                    <select asp-for="Registro.id_escolaridad" class="form-control" asp-items="ViewBag.id_escolaridad"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Registro.id_necesidad" class="control-label"></label>
+                    <select asp-for="Registro.id_necesidad" class="form-control" asp-items="ViewBag.id_necesidad"></select>
+                </div>
+                <div class="form-group text-right">
+                    <input type="submit" value="Crear" class="btn btn-primary" />
+                </div>
+            </fieldset>
+        </div>
+    </form>
+</div>
+
+<div>
+    <a asp-page="Index">Regresar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

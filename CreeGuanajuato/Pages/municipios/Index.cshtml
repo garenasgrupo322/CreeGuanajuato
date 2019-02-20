@@ -1,5 +1,5 @@
 ﻿@page
-@model CreeGuanajuato.Pages.municipios.IndexModel
+@model CreeGuanajuato.Pages.Municipios.IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -30,7 +30,7 @@
                 @Html.DisplayFor(modelItem => item.nombre_municipio)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Estado.nombre_estado)
+                @Html.DisplayFor(modelItem => item.Estado.cve_agee)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.id_municipio">Edit</a> |

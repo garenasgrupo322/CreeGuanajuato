@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CreeGuanajuato.Models;
 
-namespace CreeGuanajuato.Pages.colonias
+namespace CreeGuanajuato.Pages.Colonias
 {
     public class CreateModel : PageModel
     {

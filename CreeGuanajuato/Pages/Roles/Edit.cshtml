@@ -1,0 +1,46 @@
+﻿@page
+@model CreeGuanajuato.Pages.Roles.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+<h4>CreeGuanajuatoRole</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CreeGuanajuatoRole.Id" />
+            <div class="form-group">
+                <label asp-for="CreeGuanajuatoRole.Name" class="control-label"></label>
+                <input asp-for="CreeGuanajuatoRole.Name" class="form-control" />
+                <span asp-validation-for="CreeGuanajuatoRole.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreeGuanajuatoRole.NormalizedName" class="control-label"></label>
+                <input asp-for="CreeGuanajuatoRole.NormalizedName" class="form-control" />
+                <span asp-validation-for="CreeGuanajuatoRole.NormalizedName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreeGuanajuatoRole.ConcurrencyStamp" class="control-label"></label>
+                <input asp-for="CreeGuanajuatoRole.ConcurrencyStamp" class="form-control" />
+                <span asp-validation-for="CreeGuanajuatoRole.ConcurrencyStamp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

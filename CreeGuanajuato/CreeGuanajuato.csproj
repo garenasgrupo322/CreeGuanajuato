@@ -2,19 +2,22 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <UserSecretsId>06156202-cea3-453c-810f-f0c97fd1c00f</UserSecretsId>
+    <UserSecretsId>ce2a1794-3f5c-4f4c-9510-79498c342c04</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20190206193445_inicial.cs" />
-    <Compile Remove="Migrations\20190206193445_inicial.Designer.cs" />
+    <Compile Remove="Areas\Identity\IdentityHostingStartup.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="Pages\Usuarios\" />
   </ItemGroup>
 
 </Project>
