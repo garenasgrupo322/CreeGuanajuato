@@ -135,14 +135,14 @@
                 <input asp-for="Direccion.numero" class="form-control" />
                 <span asp-validation-for="Direccion.numero" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Registro.INE" class="control-label"></label>
+                <input asp-for="Registro.INE" class="form-control" />
+                <span asp-validation-for="Registro.INE" class="text-danger"></span>
+            </div>
         </div>
         <div class="col-lg-offset-2 col-md-4">
             <fieldset>
-                <div class="form-group">
-                    <label asp-for="Registro.INE" class="control-label"></label>
-                    <input asp-for="Registro.INE" class="form-control" />
-                    <span asp-validation-for="Registro.INE" class="text-danger"></span>
-                </div>
                 <div class="form-group">
                     <label asp-for="Registro.email" class="control-label"></label>
                     <input asp-for="Registro.email" class="form-control" />
@@ -169,6 +169,10 @@
                 <div class="form-group">
                     <label asp-for="Registro.id_necesidad" class="control-label"></label>
                     <select asp-for="Registro.id_necesidad" class="form-control" asp-items="ViewBag.id_necesidad"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Registro.id_seccion" class="control-label"></label>
+                    <select asp-for="Registro.id_seccion" class="form-control" asp-items="ViewBag.id_seccion"></select>
                 </div>
                 <div class="form-group text-right">
                     <input type="submit" value="Guardar" class="btn btn-primary" />

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -42,5 +42,11 @@ namespace CreeGuanajuato.Models
         public DbSet<CreeGuanajuatoRole> CreeGuanajuatoRole { get; set; }
 
         public DbSet<CreeGuanajuato.Models.Registro> Registro { get; set; }
+
+        public DbSet<CreeGuanajuato.Areas.Identity.Data.CreeGuanajuatoUser> CreeGuanajuatoUser { get; set; }
+
+        public DbSet<CreeGuanajuato.Models.Seccion> Seccion { get; set; }
+
+        public DbSet<CreeGuanajuato.Models.Legal> Legal { get; set; }
     }
 }

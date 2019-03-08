@@ -1,0 +1,49 @@
+@page
+@model CreeGuanajuato.Pages.Usuarios.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Usuario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nombre
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreeGuanajuatoUser.nombre)
+        </dd>
+        <dt>
+            Apellido paterno
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreeGuanajuatoUser.apellido_paterno)
+        </dd>
+        <dt>
+            Apellido materno
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreeGuanajuatoUser.apellido_materno)
+        </dd>
+        <dt>
+            Usuario
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreeGuanajuatoUser.UserName)
+        </dd>
+        <dt>
+            Correo
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreeGuanajuatoUser.Email)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.CreeGuanajuatoUser.Id">Modificar</a> |
+    <a asp-page="./Index">Regresar</a>
+</div>

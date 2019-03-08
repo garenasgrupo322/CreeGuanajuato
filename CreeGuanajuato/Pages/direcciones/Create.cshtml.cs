@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CreeGuanajuato.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CreeGuanajuato.Pages.Direcciones
 {
+    [Authorize]
     public class CreateModel : PageModel
     {
         private readonly CreeGuanajuato.Models.CreeGuanajuatoContext _context;
@@ -20,7 +22,7 @@ namespace CreeGuanajuato.Pages.Direcciones
 
         public IActionResult OnGet()
         {
-        ViewData["id_colonia"] = new SelectList(_context.Colonia, "id_colonia", "cve_loc");
+        ViewData["id_colonia"] = new SelectList(_context.Colonia, "id_colonia", "nombre_colonia");
             return Page();
         }
 

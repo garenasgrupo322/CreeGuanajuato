@@ -1,0 +1,25 @@
+@page
+@model CreeGuanajuato.Pages.Seccionales.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Sección</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Seccion.nombre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Seccion.nombre)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Seccion.id_seccion">Modificar</a> |
+    <a asp-page="./Index">Regresar</a>
+</div>

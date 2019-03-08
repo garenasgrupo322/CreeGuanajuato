@@ -6,9 +6,9 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
+<h2>Eliminar</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>¿Estás seguro que quieres eliminar el registro?</h3>
 <div>
     <h4>Necesidad</h4>
     <hr />
@@ -23,7 +23,7 @@
     
     <form method="post">
         <input type="hidden" asp-for="Necesidad.id_necesidad" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-page="./Index">Back to List</a>
+        <input type="submit" value="Eliminar" class="btn btn-default" /> |
+        <a asp-page="./Index">Regresar</a>
     </form>
 </div>

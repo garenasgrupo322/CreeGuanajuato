@@ -1,0 +1,47 @@
+@page
+@model CreeGuanajuato.Pages.Usuarios.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Eliminar</h2>
+
+<h3>¿Estás seguro que quieres eliminar el usuario?</h3>
+<div>
+    <h4>Usuario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nombre
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreeGuanajuatoUser.nombre)
+        </dd>
+        <dt>
+            Apellido Paterno
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreeGuanajuatoUser.apellido_paterno)
+        </dd>
+        <dt>
+            Apellido Materno
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreeGuanajuatoUser.apellido_materno)
+        </dd>
+        <dt>
+            Correo
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreeGuanajuatoUser.Email)
+        </dd>
+    </dl>
+    </dl>
+
+    <form method="post">
+        <input type="hidden" asp-for="CreeGuanajuatoUser.Id" />
+        <input type="submit" value="Eliminar" class="btn btn-default" /> |
+        <a asp-page="./Index">Regresar</a>
+    </form>
+</div>

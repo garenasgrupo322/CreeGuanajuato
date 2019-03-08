@@ -1,0 +1,68 @@
+@page
+@model CreeGuanajuato.Pages.Usuarios.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Agregar</h2>
+
+<h4>Usuario</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Rol</label>
+                <select asp-for="creeGuanajuatoRole.Id" class="form-control" asp-items="ViewBag.id_rol" required="required"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.nombre"></label>
+                <input asp-for="Input.nombre" class="form-control" />
+                <span asp-validation-for="Input.nombre" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.apellido_paterno"></label>
+                <input asp-for="Input.apellido_paterno" class="form-control" />
+                <span asp-validation-for="Input.apellido_paterno" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.apellido_materno"></label>
+                <input asp-for="Input.apellido_materno" class="form-control" />
+                <span asp-validation-for="Input.apellido_materno" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" class="form-control" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Password"></label>
+                <input asp-for="Input.Password" class="form-control" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.ConfirmPassword"></label>
+                <input asp-for="Input.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Regresar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

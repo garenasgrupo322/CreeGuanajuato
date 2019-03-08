@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CreeGuanajuato.Models;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CreeGuanajuato.Pages.Registros
 {
+    [Authorize]
     public class CreateModel : PageModel
     {
         private readonly CreeGuanajuato.Models.CreeGuanajuatoContext _context;
@@ -28,6 +30,7 @@ namespace CreeGuanajuato.Pages.Registros
             ViewData["id_estado_civil"] = new SelectList(_context.EstadoCivil, "id_estado_civil", "nombre");
             ViewData["id_municipio"] = new SelectList(_context.Municipio, "id_municipio", "nombre_municipio");
             ViewData["id_necesidad"] = new SelectList(_context.Necesidad, "id_necesidad", "descripcion");
+            ViewData["id_seccion"] = new SelectList(_context.Seccion, "id_seccion", "nombre");
             return Page();
         }
 

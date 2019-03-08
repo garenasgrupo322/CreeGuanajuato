@@ -29,72 +29,42 @@
                 <a asp-page="/Index" class="navbar-brand">Prueba</a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-page="/Index">Home</a></li>
-                    <li><a asp-page="/About">About</a></li>
-                    <li><a asp-page="/Contact">Contact</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Catálogos <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a asp-page="/Escolaridades/index">Roles</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a asp-page="/Escolaridades/index">Usuarios</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a asp-page="/Estados/index">Estados</a></li>
-                            <li><a asp-page="/Municipios/index">Municipios</a></li>
-                            <li><a asp-page="/Colonias/index">Colonias</a></li>
-                            <li><a asp-page="/Direcciones/index">Direcciones</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a asp-page="/Escolaridades/index">Escolaridades</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a asp-page="/EstadosCiviles/index">Estados Civiles</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a asp-page="/Necesidades/index">Necesidades</a></li>
-                        </ul>
-                    </li>
-
-                    <li><a asp-page="/Registros/index">Registros</a></li>
-                    <li><a href="#" id="btnSincronizaInegi">Sincronizar INEGI</a></li>
-
-                    <partial name="_LoginPartial" />
-                </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <partial name="_LoginPartial" />
+                    </ul>
+                </div>
             </div>
+        </nav>
+
+        <partial name="_CookieConsentPartial" />
+
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; 2019 - Prueba</p>
+            </footer>
         </div>
-    </nav>
 
-    <partial name="_CookieConsentPartial" />
+        <environment include="Development">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+        </environment>
+        <environment exclude="Development">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"></script>
+            <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                    crossorigin="anonymous"
+                    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"></script>
+            <script src="~/js/site.min.js" asp-append-version="true"></script>
+        </environment>
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2019 - Prueba</p>
-        </footer>
-    </div>
-
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
-
-    @RenderSection("Scripts", required: false)
-</body>
+        @RenderSection("Scripts", required: false)
+    </body>
 </html>

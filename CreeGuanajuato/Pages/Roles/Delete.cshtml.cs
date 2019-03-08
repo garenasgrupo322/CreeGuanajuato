@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CreeGuanajuato.Areas.Identity.Data;
 using CreeGuanajuato.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CreeGuanajuato.Pages.Roles
 {
+    [Authorize]
     public class DeleteModel : PageModel
     {
-        private readonly CreeGuanajuato.Models.CreeGuanajuatoContext _context;
+        private readonly RoleManager<CreeGuanajuatoRole> _roleManager;
 
-        public DeleteModel(CreeGuanajuato.Models.CreeGuanajuatoContext context)
+        public DeleteModel(RoleManager<CreeGuanajuatoRole> roleManager)
         {
-            _context = context;
+            _roleManager = roleManager;
         }
 
         [BindProperty]
@@ -29,7 +32,7 @@ namespace CreeGuanajuato.Pages.Roles
                 return NotFound();
             }
 
-            CreeGuanajuatoRole = await _context.CreeGuanajuatoRole.FirstOrDefaultAsync(m => m.Id == id);
+            CreeGuanajuatoRole = await _roleManager.FindByIdAsync(id);
 
             if (CreeGuanajuatoRole == null)
             {
@@ -45,12 +48,16 @@ namespace CreeGuanajuato.Pages.Roles
                 return NotFound();
             }
 
-            CreeGuanajuatoRole = await _context.CreeGuanajuatoRole.FindAsync(id);
+            CreeGuanajuatoRole = await _roleManager.FindByIdAsync(id);
 
             if (CreeGuanajuatoRole != null)
             {
-                _context.CreeGuanajuatoRole.Remove(CreeGuanajuatoRole);
-                await _context.SaveChangesAsync();
+                var result = await _roleManager.DeleteAsync(CreeGuanajuatoRole);
+                var rolId = await _roleManager.GetRoleIdAsync(CreeGuanajuatoRole);
+                if (!result.Succeeded)
+                {
+                    throw new InvalidOperationException($"Unexpected error occurred deleteing role with ID '{rolId}'.");
+                }
             }
 
             return RedirectToPage("./Index");

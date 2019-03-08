@@ -33,6 +33,9 @@ namespace CreeGuanajuato.Models
         [DisplayName("Necesidad")]
         public int? id_necesidad { get; set; }
 
+        [DisplayName("Seccional")]
+        public int? id_seccion { get; set; }
+
         [Required]
         [DisplayName("Nombre")]
         public string nombre { get; set; }
@@ -60,8 +63,13 @@ namespace CreeGuanajuato.Models
         public DateTime fecha_nacimiento { get; set; }
 
         [Required]
+        [Range(1,20, ErrorMessage = "El valor debe de ser entre 1 y 20")]
         [Display(Name = "Número de hijos")]
         public int numero_hijos { get; set; }
+
+        public double longitud { get; set; }
+
+        public double latitud { get; set; }
 
         public virtual Estado Estado { get; set; }
         public virtual Municipio Municipio { get; set; }
@@ -70,5 +78,6 @@ namespace CreeGuanajuato.Models
         public virtual Escolaridad Escolaridad { get; set; }
         public virtual EstadoCivil EstadoCivil { get; set; }
         public virtual Necesidad Necesidad { get; set; }
+        public virtual Seccion Seccion { get; set; }
     }
 }

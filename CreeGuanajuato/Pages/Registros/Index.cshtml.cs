@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CreeGuanajuato.Models;
 using CreeGuanajuato.Utils;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CreeGuanajuato.Pages.Registros
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         public string CurrentSort { get; private set; }
@@ -49,6 +51,7 @@ namespace CreeGuanajuato.Pages.Registros
                 .Include(r => r.EstadoCivil)
                 .Include(r => r.Municipio)
                 .Include(r => r.Necesidad)
+                .OrderByDescending(i => i.id_registro)
                                               select s;
 
             if (!String.IsNullOrEmpty(busqueda))
@@ -56,7 +59,7 @@ namespace CreeGuanajuato.Pages.Registros
                 registroIQ = registroIQ.Where(s => s.nombre.Contains(busqueda) || s.apellido_materno.Contains(busqueda) || s.apellido_paterno.Contains(busqueda));
             }
 
-            int pageSize = 3;
+            int pageSize = 10;
             Registro = await PaginatedList<Registro>.CreateAsync(
                 registroIQ.AsNoTracking(), pageIndex ?? 1, pageSize);
         }

@@ -1,12 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Http;
 using CreeGuanajuato.Areas.Identity.Data;
+using CreeGuanajuato.Helpers;
 using CreeGuanajuato.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +31,8 @@ namespace CreeGuanajuato
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<AppSettings>(Configuration.GetSection("appSettings"));
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -33,16 +40,22 @@ namespace CreeGuanajuato
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
             services.AddDbContext<CreeGuanajuatoContext>(options =>
                     options.UseSqlServer(
                         Configuration.GetConnectionString("CreeGuanajuatoContextConnection")));
 
             services.AddDefaultIdentity<CreeGuanajuatoUser>(config =>
             {
-                config.SignIn.RequireConfirmedEmail = true;
-            }).AddRoles<CreeGuanajuatoRole>()
+                config.SignIn.RequireConfirmedEmail = false;
+            })
+                .AddRoles<CreeGuanajuatoRole>()
                 .AddEntityFrameworkStores<CreeGuanajuatoContext>();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdministratorRole",
+                    policy => policy.RequireRole("Administrador"));
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

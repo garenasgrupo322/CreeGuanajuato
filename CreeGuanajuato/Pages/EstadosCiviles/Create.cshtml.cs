@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CreeGuanajuato.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CreeGuanajuato.Pages.EstadosCiviles
 {
+    [Authorize]
     public class CreateModel : PageModel
     {
         private readonly CreeGuanajuato.Models.CreeGuanajuatoContext _context;

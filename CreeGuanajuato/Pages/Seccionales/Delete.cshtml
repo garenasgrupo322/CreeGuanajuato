@@ -1,0 +1,28 @@
+@page
+@model CreeGuanajuato.Pages.Seccionales.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Eliminar</h2>
+
+<h3>¿Estás seguro que quieres eliminar el registro?</h3>
+<div>
+    <h4>Seccion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Seccion.nombre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Seccion.nombre)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Seccion.id_seccion" />
+        <input type="submit" value="Eliminar" class="btn btn-default" /> |
+        <a asp-page="./Index">Regresar</a>
+    </form>
+</div>

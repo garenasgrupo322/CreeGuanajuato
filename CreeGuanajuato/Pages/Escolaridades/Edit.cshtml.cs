@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CreeGuanajuato.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CreeGuanajuato.Pages.Escolaridades
 {
+    [Authorize]
     public class EditModel : PageModel
     {
         private readonly CreeGuanajuato.Models.CreeGuanajuatoContext _context;

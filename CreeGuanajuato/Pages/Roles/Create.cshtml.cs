@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CreeGuanajuato.Areas.Identity.Data;
 using CreeGuanajuato.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CreeGuanajuato.Pages.Roles
 {
+    [Authorize]
     public class CreateModel : PageModel
     {
-        private readonly CreeGuanajuato.Models.CreeGuanajuatoContext _context;
+        private readonly RoleManager<CreeGuanajuatoRole> _roleManager;
 
-        public CreateModel(CreeGuanajuato.Models.CreeGuanajuatoContext context)
+        public CreateModel(RoleManager<CreeGuanajuatoRole> roleManager)
         {
-            _context = context;
+            _roleManager = roleManager;
         }
 
         public IActionResult OnGet()
@@ -34,8 +37,20 @@ namespace CreeGuanajuato.Pages.Roles
                 return Page();
             }
 
-            _context.CreeGuanajuatoRole.Add(CreeGuanajuatoRole);
-            await _context.SaveChangesAsync();
+
+            var result = await _roleManager.CreateAsync(CreeGuanajuatoRole);
+
+            if (result.Succeeded)
+            {
+                return RedirectToPage("./Index");
+            }
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+            //_context.CreeGuanajuatoRole.Add(CreeGuanajuatoRole);
+            //await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }

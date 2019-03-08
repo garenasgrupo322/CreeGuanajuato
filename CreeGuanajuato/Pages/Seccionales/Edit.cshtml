@@ -1,0 +1,35 @@
+@page
+@model CreeGuanajuato.Pages.Seccionales.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Modificar</h2>
+
+<h4>Sección</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Seccion.id_seccion" />
+            <div class="form-group">
+                <label asp-for="Seccion.nombre" class="control-label"></label>
+                <input asp-for="Seccion.nombre" class="form-control" />
+                <span asp-validation-for="Seccion.nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Regresar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

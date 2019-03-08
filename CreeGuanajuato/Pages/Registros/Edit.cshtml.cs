@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CreeGuanajuato.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CreeGuanajuato.Pages.Registros
 {
+    [Authorize]
     public class EditModel : PageModel
     {
         private readonly CreeGuanajuato.Models.CreeGuanajuatoContext _context;
@@ -39,6 +41,7 @@ namespace CreeGuanajuato.Pages.Registros
                 .Include(r => r.Estado)
                 .Include(r => r.EstadoCivil)
                 .Include(r => r.Municipio)
+                .Include(r => r.Seccion)
                 .Include(r => r.Necesidad).FirstOrDefaultAsync(m => m.id_registro == id);
 
             Direccion = await _context.Direccion
@@ -55,6 +58,7 @@ namespace CreeGuanajuato.Pages.Registros
            ViewData["id_estado_civil"] = new SelectList(_context.EstadoCivil, "id_estado_civil", "nombre");
            ViewData["id_municipio"] = new SelectList(_context.Municipio, "id_municipio", "nombre_municipio");
            ViewData["id_necesidad"] = new SelectList(_context.Necesidad, "id_necesidad", "descripcion");
+           ViewData["id_seccion"] = new SelectList(_context.Seccion, "id_seccion", "nombre");
             return Page();
         }
 

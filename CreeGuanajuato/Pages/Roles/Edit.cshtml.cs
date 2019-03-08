@@ -8,16 +8,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CreeGuanajuato.Areas.Identity.Data;
 using CreeGuanajuato.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CreeGuanajuato.Pages.Roles
 {
+    [Authorize]
     public class EditModel : PageModel
     {
-        private readonly CreeGuanajuato.Models.CreeGuanajuatoContext _context;
+        private readonly RoleManager<CreeGuanajuatoRole> _roleManager;
 
-        public EditModel(CreeGuanajuato.Models.CreeGuanajuatoContext context)
+        public EditModel(RoleManager<CreeGuanajuatoRole> roleManager)
         {
-            _context = context;
+            _roleManager = roleManager;
         }
 
         [BindProperty]
@@ -30,7 +33,7 @@ namespace CreeGuanajuato.Pages.Roles
                 return NotFound();
             }
 
-            CreeGuanajuatoRole = await _context.CreeGuanajuatoRole.FirstOrDefaultAsync(m => m.Id == id);
+            CreeGuanajuatoRole = await _roleManager.FindByIdAsync(id);
 
             if (CreeGuanajuatoRole == null)
             {
@@ -46,30 +49,18 @@ namespace CreeGuanajuato.Pages.Roles
                 return Page();
             }
 
-            _context.Attach(CreeGuanajuatoRole).State = EntityState.Modified;
+            var role = await _roleManager.FindByIdAsync(CreeGuanajuatoRole.Id);
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _roleManager.SetRoleNameAsync(role, CreeGuanajuatoRole.Name);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CreeGuanajuatoRoleExists(CreeGuanajuatoRole.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return Page();
             }
 
             return RedirectToPage("./Index");
-        }
-
-        private bool CreeGuanajuatoRoleExists(string id)
-        {
-            return _context.CreeGuanajuatoRole.Any(e => e.Id == id);
         }
     }
 }

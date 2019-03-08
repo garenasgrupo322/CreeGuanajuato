@@ -15,7 +15,7 @@ namespace CreeGuanajuato.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -163,6 +163,20 @@ namespace CreeGuanajuato.Migrations
                     b.ToTable("EstadoCivil");
                 });
 
+            modelBuilder.Entity("CreeGuanajuato.Models.Legal", b =>
+                {
+                    b.Property<int>("id_legal")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("descripcion")
+                        .IsRequired();
+
+                    b.HasKey("id_legal");
+
+                    b.ToTable("Legal");
+                });
+
             modelBuilder.Entity("CreeGuanajuato.Models.Municipio", b =>
                 {
                     b.Property<int>("id_municipio")
@@ -232,6 +246,12 @@ namespace CreeGuanajuato.Migrations
 
                     b.Property<int?>("id_necesidad");
 
+                    b.Property<int?>("id_seccion");
+
+                    b.Property<double>("latitud");
+
+                    b.Property<double>("longitud");
+
                     b.Property<string>("nombre")
                         .IsRequired();
 
@@ -253,7 +273,23 @@ namespace CreeGuanajuato.Migrations
 
                     b.HasIndex("id_necesidad");
 
+                    b.HasIndex("id_seccion");
+
                     b.ToTable("Registro");
+                });
+
+            modelBuilder.Entity("CreeGuanajuato.Models.Seccion", b =>
+                {
+                    b.Property<int>("id_seccion")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("nombre")
+                        .IsRequired();
+
+                    b.HasKey("id_seccion");
+
+                    b.ToTable("Seccion");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -438,6 +474,10 @@ namespace CreeGuanajuato.Migrations
                     b.HasOne("CreeGuanajuato.Models.Necesidad", "Necesidad")
                         .WithMany()
                         .HasForeignKey("id_necesidad");
+
+                    b.HasOne("CreeGuanajuato.Models.Seccion", "Seccion")
+                        .WithMany()
+                        .HasForeignKey("id_seccion");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

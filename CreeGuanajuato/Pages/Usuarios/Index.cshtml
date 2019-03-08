@@ -1,0 +1,84 @@
+@page
+@model CreeGuanajuato.Pages.Usuarios.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Usuarios</h2>
+
+<p>
+    <a asp-page="Create">Nuevo registro</a>
+</p>
+
+<form asp-page="./Index" method="get">
+    <div class="row">
+        <div class="col-lg-offset-4 col-md-1">
+            <label>Búsqueda</label>
+        </div>
+        <div class="col-md-4">
+            <input type="text" name="busqueda" value="@Model.CurrentFilter" class="form-control" />
+        </div>
+        <div class="col-md-1">
+            <input type="submit" value="Búsqueda" class="btn btn-default" />
+        </div>
+        <div class="col-md-1">
+            <a asp-page="./Index" class="btn btn-default">Limpiar</a>
+        </div>
+        <div class="col-md-1">
+            <a href="#" class="btn btn-default">Excel</a>
+        </div>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Apellido Paterno
+            </th>
+            <th>
+                Apellido Materno
+            </th>
+            <th>
+                Correo
+            </th>
+            <th>
+                Roles
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.CreeGuanajuatoUser)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.apellido_paterno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.apellido_materno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.roles)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Modificar</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Detalles</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Elminiar</a> |
+                    <a asp-page="./Card" asp-route-id="@item.Id">Tarjeta</a> |
+                    <a asp-page="./ChangePassword" asp-route-id="@item.Id">Cambiar contraseña</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CreeGuanajuato.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CreeGuanajuato.Pages.Colonias
 {
+    [Authorize]
+
     public class DeleteModel : PageModel
     {
         private readonly CreeGuanajuato.Models.CreeGuanajuatoContext _context;

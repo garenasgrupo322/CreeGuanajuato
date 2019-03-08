@@ -215,3 +215,13 @@ FakesAssemblies/
 **/*.Server/GeneratedArtifacts
 **/*.Server/ModelManifest.xml
 _Pvt_Extensions
+CreeGuanajuato/.DS_Store
+.DS_Store
+.vscode/launch.json
+.vscode/tasks.json
+CreeGuanajuato.pod
+dbsql
+CreeGuanajuato/appsettings.json
+CreeGuanajuato/appsettings.json
+CreeGuanajuato/appsettings.json
+CreeGuanajuato/appsettings.json
