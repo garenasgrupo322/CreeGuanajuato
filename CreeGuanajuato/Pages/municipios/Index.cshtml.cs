@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CreeGuanajuato.Models;
 using CreeGuanajuato.Utils;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CreeGuanajuato.Pages.Municipios
 {
@@ -26,8 +27,10 @@ namespace CreeGuanajuato.Pages.Municipios
         public PaginatedList<Municipio> Municipio { get;set; }
 
         public async Task OnGetAsync(string sortOrder,
-            string currentFilter, string busqueda, int? pageIndex)
+            string currentFilter, string busqueda, int? pageIndex, int? id_estado)
         {
+            ViewData["id_estado"] = new SelectList(_context.Estado, "id_estado", "nombre_estado");
+
             CurrentSort = sortOrder;
 
 
@@ -49,6 +52,10 @@ namespace CreeGuanajuato.Pages.Municipios
             if (!String.IsNullOrEmpty(busqueda))
             {
                 registroIQ = registroIQ.Where(s => s.nombre_municipio.Contains(busqueda));
+            }
+
+            if (id_estado != 0 && id_estado != null) {
+                registroIQ = registroIQ.Where(s => s.id_estado.Equals(id_estado));
             }
 
             int pageSize = 10;

@@ -6,6 +6,11 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
+@section Style {
+    <link rel="stylesheet" href="~/lib/jquery-ui-1.12.1/jquery-ui.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/custom-combobox.css" asp-append-version="true" />
+}
+
 <h2>Municipios</h2>
 
 <p>
@@ -14,17 +19,23 @@
 
 <form asp-page="./Index" method="get">
     <div class="row">
-        <div class="col-lg-offset-5 col-md-1">
+        <div class="col-lg-offset-1 col-md-1">
             <label>Búsqueda</label>
         </div>
         <div class="col-md-4">
             <input type="text" name="busqueda" value="@Model.CurrentFilter" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <select id="id_estado" name="id_estado" class="form-control" asp-items="ViewBag.id_estado"></select>
         </div>
         <div class="col-md-1">
             <input type="submit" value="Búsqueda" class="btn btn-default" />
         </div>
         <div class="col-md-1">
             <a asp-page="./Index" class="btn btn-default">Limpiar</a>
+        </div>
+        <div class="col-md-1">
+            <a href="#" class="btn btn-default">Excel</a>
         </div>
     </div>
 </form>
@@ -79,3 +90,18 @@
    class="btn btn-default @nextDisabled">
     Siguiente
 </a>
+
+@section Scripts {
+    <script src="~/lib/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="~/js/custom-combobox.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function() {
+            function inicializa() {
+                $("#id_estado").append('<option value="0" selected>Seleccione<option>');
+                $("#id_estado").combobox();
+            }
+
+            $(document).ready(inicializa);
+        })
+    </script>
+}

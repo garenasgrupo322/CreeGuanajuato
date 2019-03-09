@@ -239,6 +239,8 @@ namespace CreeGuanajuato.Controllers
                 Debug.Print(ex.Message);
             }
 
+            registro.NormalizedNombre = registro.nombre + " " + registro.apellido_paterno + " " + registro.apellido_materno;
+
             _context.Registro.Add(registro);
             await _context.SaveChangesAsync();  
 

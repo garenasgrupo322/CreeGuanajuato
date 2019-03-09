@@ -9,6 +9,7 @@ using CreeGuanajuato.Areas.Identity.Data;
 using CreeGuanajuato.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CreeGuanajuato.Pages.Usuarios
 {
@@ -16,12 +17,15 @@ namespace CreeGuanajuato.Pages.Usuarios
     public class IndexModel : PageModel
     {
         public readonly UserManager<CreeGuanajuatoUser> _userManager;
+        private readonly RoleManager<CreeGuanajuatoRole> _roleManager;
         public string CurrentSort { get; private set; }
         public string CurrentFilter { get; set; }
 
-        public IndexModel(UserManager<CreeGuanajuatoUser> userManager)
+        public IndexModel(UserManager<CreeGuanajuatoUser> userManager,
+            RoleManager<CreeGuanajuatoRole> roleManager)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public List<CustomUser> CreeGuanajuatoUser { get;set; }
@@ -31,8 +35,9 @@ namespace CreeGuanajuato.Pages.Usuarios
         }
 
         public async Task OnGetAsync(string sortOrder,
-            string currentFilter, string busqueda, int? pageIndex)
+            string currentFilter, string busqueda, int? pageIndex, string id_rol)
         {
+            ViewData["id_rol"] = new SelectList(_roleManager.Roles, "Id", "Name");
 
             CurrentSort = sortOrder;
 
@@ -48,13 +53,29 @@ namespace CreeGuanajuato.Pages.Usuarios
 
             CurrentFilter = busqueda;
 
-            IQueryable<CreeGuanajuatoUser> registroIQ = from s in _userManager.Users
-                .OrderByDescending(i => i.Id)
+            IQueryable<CreeGuanajuatoUser> registroIQ;
+
+            if (!string.IsNullOrEmpty(id_rol)) {
+                CreeGuanajuatoRole role = await _roleManager.FindByIdAsync(id_rol);
+
+                IList<CreeGuanajuatoUser> users = await _userManager.GetUsersInRoleAsync(role.Name);
+
+                registroIQ = from s in users.AsQueryable()
+                    .OrderByDescending(i => i.Id)
                                               select s;
+            } else {
+                registroIQ = from s in _userManager.Users
+                    .OrderByDescending(i => i.Id)
+                                              select s;
+            }
 
             if (!String.IsNullOrEmpty(busqueda))
             {
                 registroIQ = registroIQ.Where(s => s.nombre.Contains(busqueda) || s.apellido_paterno.Contains(busqueda) || s.apellido_materno.Contains(busqueda) || s.Email.Contains(busqueda));
+            }
+
+            if (!string.IsNullOrEmpty(id_rol)) {
+                
             }
 
             /*IList<CreeGuanajuatoUser> userIQ = (from s in _userManager.Users

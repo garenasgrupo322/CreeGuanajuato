@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CreeGuanajuato.Models;
 using CreeGuanajuato.Utils;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CreeGuanajuato.Pages.Direcciones
 {
@@ -26,8 +27,10 @@ namespace CreeGuanajuato.Pages.Direcciones
         public PaginatedList<Direccion> Direccion { get;set; }
 
         public async Task OnGetAsync(string sortOrder,
-            string currentFilter, string busqueda, int? pageIndex)
+            string currentFilter, string busqueda, int? pageIndex, int? id_colonia)
         {
+            ViewData["id_colonia"] = new SelectList(_context.Colonia, "id_colonia", "nombre_colonia");
+            
             CurrentSort = sortOrder;
 
 
@@ -49,6 +52,10 @@ namespace CreeGuanajuato.Pages.Direcciones
             if (!String.IsNullOrEmpty(busqueda))
             {
                 registroIQ = registroIQ.Where(s => s.calle.Contains(busqueda));
+            }
+
+            if (id_colonia != 0 && id_colonia != null) {
+                registroIQ = registroIQ.Where(s => s.id_colonia.Equals(id_colonia));
             }
 
             int pageSize = 10;

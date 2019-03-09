@@ -48,6 +48,8 @@ namespace CreeGuanajuato.Models
         [DisplayName("Apellido materno")]
         public string apellido_materno { get; set; }
 
+        public string NormalizedNombre { get; set; }
+
         [Required]
         [DisplayName("INE")]
         public string INE { get; set; }

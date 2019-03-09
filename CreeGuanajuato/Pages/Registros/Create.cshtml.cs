@@ -66,6 +66,7 @@ namespace CreeGuanajuato.Pages.Registros
 
             Registro.id_direccion = direccion.id_direccion;
 
+            Registro.NormalizedNombre = Registro.nombre + " " + Registro.apellido_paterno + " " + Registro.apellido_materno;
             _context.Registro.Add(Registro);
             await _context.SaveChangesAsync();
 
