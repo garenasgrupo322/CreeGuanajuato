@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CreeGuanajuato.Models;
+using Microsoft.AspNetCore.Identity;
+using CreeGuanajuato.Areas.Identity.Data;
 
 namespace CreeGuanajuato.Controllers
 {
@@ -14,17 +16,27 @@ namespace CreeGuanajuato.Controllers
     public class ColoniasController : ControllerBase
     {
         private readonly CreeGuanajuatoContext _context;
+        private readonly UserManager<CreeGuanajuatoUser> _userManager;
+        private readonly SignInManager<CreeGuanajuatoUser> _signInManager;
 
-        public ColoniasController(CreeGuanajuatoContext context)
+        public ColoniasController(CreeGuanajuatoContext context,
+            UserManager<CreeGuanajuatoUser> userManager,
+            SignInManager<CreeGuanajuatoUser> signInManager)
         {
             _context = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         // GET: api/Colonias
         [HttpGet]
-        public IEnumerable<Colonia> GetColonia()
+        public IEnumerable<Colonia> GetColonia(string id_municipio)
         {
-            return _context.Colonia;
+            if (!string.IsNullOrEmpty(id_municipio) && !id_municipio.Equals('0')) {
+                return _context.Colonia.Where(i => i.id_municipio.Equals(int.Parse(id_municipio)));
+            } else {
+                return _context.Colonia;
+            }
         }
 
         // GET: api/Colonias/5

@@ -6,25 +6,40 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CreeGuanajuato.Models;
+using Microsoft.AspNetCore.Identity;
+using CreeGuanajuato.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CreeGuanajuato.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class MunicipiosController : ControllerBase
     {
         private readonly CreeGuanajuatoContext _context;
+        private readonly UserManager<CreeGuanajuatoUser> _userManager;
+        private readonly SignInManager<CreeGuanajuatoUser> _signInManager;
 
-        public MunicipiosController(CreeGuanajuatoContext context)
+        public MunicipiosController(CreeGuanajuatoContext context,
+            UserManager<CreeGuanajuatoUser> userManager,
+            SignInManager<CreeGuanajuatoUser> signInManager)
         {
             _context = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         // GET: api/Municipios
         [HttpGet]
-        public IEnumerable<Municipio> GetMunicipio()
+        public IEnumerable<Municipio> GetMunicipio(string id_estado)
         {
-            return _context.Municipio;
+            if (!string.IsNullOrEmpty(id_estado) && !id_estado.Equals("0")) {
+                return _context.Municipio.Where(i => i.id_estado.Equals(int.Parse(id_estado)));
+            } 
+            else {
+                return _context.Municipio;
+            }
         }
 
         // GET: api/Municipios/5
