@@ -35,7 +35,6 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\images\logo_color.png" />
-    <Content Remove="Pages\Usuarios\Card.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\images\logo_color.png" />
