@@ -4,14 +4,16 @@ using CreeGuanajuato.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CreeGuanajuato.Migrations
 {
     [DbContext(typeof(CreeGuanajuatoContext))]
-    partial class CreeGuanajuatoContextModelSnapshot : ModelSnapshot
+    [Migration("20190313101143_AddUrlProfiler")]
+    partial class AddUrlProfiler
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

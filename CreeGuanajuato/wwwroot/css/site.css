@@ -35,3 +35,9 @@ body {
         display: none;
     }
 }
+
+
+.navbar-inverse {
+    background-color: #285B81;
+    border-color: #285B81;
+}

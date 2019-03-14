@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using CreeGuanajuato.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using CreeGuanajuato.Models;
-using System.Diagnostics;
 
-namespace CreeGuanajuato.Controllers
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace CreeGuanajuatoApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
-    [ApiController]
-    public class RegistroesController : ControllerBase
+    public class RegistroesController : Controller
     {
         private readonly CreeGuanajuatoContext _context;
         public static Services.ServiceManager oServiceManager { get; private set; }
-
 
         public RegistroesController(CreeGuanajuatoContext context)
         {
@@ -24,14 +25,12 @@ namespace CreeGuanajuato.Controllers
             oServiceManager = new Services.ServiceManager(new Services.RestService());
         }
 
-        // GET: api/Registroes
         [HttpGet]
         public IEnumerable<Registro> GetRegistro()
         {
             return _context.Registro;
         }
 
-        // GET: api/Registroes/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetRegistro([FromRoute] int id)
         {
@@ -63,19 +62,23 @@ namespace CreeGuanajuato.Controllers
                 .Include(r => r.Necesidad)
                                               select s;
 
-            if (registro.id_estado != 0) {
+            if (registro.id_estado != 0)
+            {
                 registroIQ = registroIQ.Where(s => s.id_estado == registro.id_estado);
             }
 
-            if (registro.id_municipio != 0) {
+            if (registro.id_municipio != 0)
+            {
                 registroIQ = registroIQ.Where(s => s.id_municipio == registro.id_municipio);
             }
 
-            if (registro.id_colonia != 0) {
+            if (registro.id_colonia != 0)
+            {
                 registroIQ = registroIQ.Where(s => s.id_colonia == registro.id_colonia);
             }
 
-            if (registro.id_escolaridad != 0) {
+            if (registro.id_escolaridad != 0)
+            {
                 registroIQ = registroIQ.Where(s => s.id_escolaridad == registro.id_escolaridad);
             }
 
@@ -84,8 +87,9 @@ namespace CreeGuanajuato.Controllers
                 registroIQ = registroIQ.Where(s => s.id_necesidad == registro.id_necesidad);
             }
 
-            if (!string.IsNullOrEmpty(registro.busqueda)) {
-                registroIQ = registroIQ.Where(s => s.nombre.Contains(registro.busqueda) || s.apellido_materno.Contains(registro.busqueda) || s.apellido_paterno.Contains(registro.busqueda) || 
+            if (!string.IsNullOrEmpty(registro.busqueda))
+            {
+                registroIQ = registroIQ.Where(s => s.nombre.Contains(registro.busqueda) || s.apellido_materno.Contains(registro.busqueda) || s.apellido_paterno.Contains(registro.busqueda) ||
                     s.INE.Contains(registro.busqueda));
             }
 
@@ -102,8 +106,7 @@ namespace CreeGuanajuato.Controllers
             public int id_necesidad { get; set; }
             public string busqueda { get; set; }
         }
-
-        // POST: api/Registroes
+        
         [HttpPost]
         public async Task<IActionResult> PostRegistro([FromBody] Registro registro)
         {
@@ -149,13 +152,13 @@ namespace CreeGuanajuato.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            if (_context.Direccion.Any(i => i.calle.Equals(registro.Direccion.calle) && i.numero.Equals(registro.Direccion.numero) 
+            if (_context.Direccion.Any(i => i.calle.Equals(registro.Direccion.calle) && i.numero.Equals(registro.Direccion.numero)
                 && i.id_colonia == registro.Colonia.id_colonia))
             {
                 registro.Direccion = _context.Direccion.Where(i => i.calle.Equals(registro.Direccion.calle) && i.numero.Equals(registro.Direccion.numero)
                     && i.id_colonia == registro.Colonia.id_colonia).First();
-            } 
-            else 
+            }
+            else
             {
                 registro.Direccion.id_direccion = 0;
                 registro.Direccion.id_colonia = registro.Colonia.id_colonia;
@@ -196,7 +199,8 @@ namespace CreeGuanajuato.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            if (_context.Seccion.Any(i => i.nombre.Equals(registro.Seccion.nombre))) {
+            if (_context.Seccion.Any(i => i.nombre.Equals(registro.Seccion.nombre)))
+            {
                 registro.Seccion = _context.Seccion.Where(i => i.nombre.Equals(registro.Seccion.nombre)).First();
             }
             else
@@ -234,7 +238,8 @@ namespace CreeGuanajuato.Controllers
 
                 registro.latitud = coordenadas.results[0].geometry.location.lat;
                 registro.longitud = coordenadas.results[0].geometry.location.lng;
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Debug.Print(ex.Message);
             }
@@ -242,7 +247,7 @@ namespace CreeGuanajuato.Controllers
             registro.NormalizedNombre = registro.nombre + " " + registro.apellido_paterno + " " + registro.apellido_materno;
 
             _context.Registro.Add(registro);
-            await _context.SaveChangesAsync();  
+            await _context.SaveChangesAsync();
 
 
 

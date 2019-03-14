@@ -14,8 +14,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using QRCoder;
 
 namespace CreeGuanajuato.Pages.Usuarios
@@ -25,45 +27,66 @@ namespace CreeGuanajuato.Pages.Usuarios
     {
         private readonly UserManager<CreeGuanajuatoUser> _userManager;
         private readonly SignInManager<CreeGuanajuatoUser> _signInManager;
-        private readonly AppSettings _appSettings;
+        private readonly IConfiguration _configuration;
 
         public CardModel(UserManager<CreeGuanajuatoUser> userManager,
             SignInManager<CreeGuanajuatoUser> signInManager,
-            IOptions<AppSettings> appSettings)
+            IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _appSettings = appSettings.Value;
+            _configuration = configuration;
         }
 
         [BindProperty]
         public CreeGuanajuatoUser CreeGuanajuatoUser { get; set; }
 
+        public string roles { get; set; }
+
+
         public async Task<IActionResult> OnGetAsync(string id)
         {
             CreeGuanajuatoUser = await _userManager.FindByIdAsync(id);
+            CreeGuanajuatoUser usr = await _userManager.FindByNameAsync(CreeGuanajuatoUser.UserName);
+
             if (CreeGuanajuatoUser == null)
             {
                 return NotFound($"Unable to load user with ID '{ id }'.");
             }
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
+            if (string.IsNullOrEmpty(usr.url))
             {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.Name.ToString(), CreeGuanajuatoUser.Id)
-                }),
-                Expires = DateTime.UtcNow.AddDays(360),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                usr.url = "/images/logo_color.png";
+            }
+            else
+            {
+                usr.url = "/images/profiler/" + usr.url;
+            }
+
+            var rolesUsuario = await _userManager.GetRolesAsync(usr);
+            roles = string.Join(",", rolesUsuario);
+
+            var claims = new[]
+            {
+                new Claim("UserData", JsonConvert.SerializeObject(usr))
             };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var tokenString = tokenHandler.WriteToken(token);
+
+            var token = new JwtSecurityToken
+            (
+                issuer: _configuration["ApiAuth:Issuer"],
+                audience: _configuration["ApiAuth:Audience"],
+                claims: claims,
+                expires: DateTime.UtcNow.AddYears(1),
+                notBefore: DateTime.UtcNow,
+                signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["ApiAuth:SecretKey"])),
+                SecurityAlgorithms.HmacSha256)
+            );
+
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
 
             MemoryStream ms = new MemoryStream();
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            QRCodeData qrCodeData = qrGenerator.CreateQrCode(tokenString, QRCodeGenerator.ECCLevel.Q);
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(tokenString, QRCodeGenerator.ECCLevel.L);
             QRCode qrCode = new QRCode(qrCodeData);
             Bitmap qrCodeImage = qrCode.GetGraphic(2);
             qrCodeImage.Save(ms, ImageFormat.Png);

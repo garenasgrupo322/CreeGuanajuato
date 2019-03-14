@@ -23,12 +23,9 @@ namespace CreeGuanajuato.Pages.Registros
 
         public IActionResult OnGet()
         {
-            ViewData["id_colonia"] = new SelectList(_context.Colonia, "id_colonia", "nombre_colonia");
-            ViewData["id_direccion"] = new SelectList(_context.Direccion, "id_direccion", "id_direccion");
             ViewData["id_escolaridad"] = new SelectList(_context.Escolaridad, "id_escolaridad", "nombre");
             ViewData["id_estado"] = new SelectList(_context.Estado, "id_estado", "nombre_estado");
             ViewData["id_estado_civil"] = new SelectList(_context.EstadoCivil, "id_estado_civil", "nombre");
-            ViewData["id_municipio"] = new SelectList(_context.Municipio, "id_municipio", "nombre_municipio");
             ViewData["id_necesidad"] = new SelectList(_context.Necesidad, "id_necesidad", "descripcion");
             ViewData["id_seccion"] = new SelectList(_context.Seccion, "id_seccion", "nombre");
             return Page();

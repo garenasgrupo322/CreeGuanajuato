@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreeGuanajuato", "CreeGuanajuato\CreeGuanajuato.csproj", "{AB8E2A38-5FC5-45FB-847F-BB63CDA10E21}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreeGuanajuatoApi", "CreeGuanajuatoApi\CreeGuanajuatoApi.csproj", "{5BE7C17E-24E9-411D-8242-C32F83C182C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{AB8E2A38-5FC5-45FB-847F-BB63CDA10E21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB8E2A38-5FC5-45FB-847F-BB63CDA10E21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB8E2A38-5FC5-45FB-847F-BB63CDA10E21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BE7C17E-24E9-411D-8242-C32F83C182C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BE7C17E-24E9-411D-8242-C32F83C182C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BE7C17E-24E9-411D-8242-C32F83C182C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BE7C17E-24E9-411D-8242-C32F83C182C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

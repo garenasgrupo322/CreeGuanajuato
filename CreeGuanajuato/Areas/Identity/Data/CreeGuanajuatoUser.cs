@@ -17,5 +17,7 @@ namespace CreeGuanajuato.Areas.Identity.Data
 
         [PersonalData]
         public string apellido_materno { get; set; }
+
+        public string url { get; set; }
     }
 }
